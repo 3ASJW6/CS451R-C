@@ -8,6 +8,7 @@ from backEnd.API.Location import Location
 from backEnd.API.Utility import application, parentQuery, childQuery, joinQuery
 from frontEnd.Layout.Login import loginLayout
 from frontEnd.Layout.Event import eventLayout
+from frontEnd.Layout.Dashboard import dashboardLayout
 # >
 
 connection_string = pyodbc.connect(
@@ -20,7 +21,7 @@ connection_string = pyodbc.connect(
 cursor = connection_string.cursor()
 
 if __name__ == '__main__':
-    application.layout = eventLayout
+    application.layout = dashboardLayout
     application.run_server(debug = True)
 
 

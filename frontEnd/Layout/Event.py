@@ -2,6 +2,7 @@
 from dash import html, dcc
 from dash.dependencies import Input, Output, State
 from backEnd.API.Utility import getJSON, application, Login, Verify
+from backEnd.API.Event import Event
 import dash_bootstrap_components as dbc
 
 # >
@@ -9,6 +10,8 @@ import dash_bootstrap_components as dbc
 
 # Declaration <
 style = getJSON(file = '/frontEnd/Resource/Event.json')
+eventObject = Event()
+info = eventObject.getEvent(123456)
 eventLayout = html.Div(
     [
         dbc.Button("Open modal", id="open", n_clicks=0),
@@ -47,7 +50,7 @@ eventLayout = html.Div(
 def render_content(tab):
     if tab == 'details-tab':
         return html.Div([
-            html.Div("Yesterday at 4:00pm"),
+            html.Div("Yesterday at 4:00pm {}".format(info)),
             html.Div("Scheduled: on 11-29-2021 at 12:06am"),
             html.Div("Zoom link: Tutor will email"),
             html.Div("CompSci Assignments")
