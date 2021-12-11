@@ -104,23 +104,26 @@ def homeLayout(username):
                                                                                       # >
 
                                                                                       # Search <
-                                                                                      dcc.Dropdown(placeholder = 'Search',
+                                                                                      dcc.Dropdown(placeholder = 'Find',
                                                                                                    id = 'searchDropdownId',
                                                                                                    style = style['searchDropdownStyle'],
-                                                                                                   options = [{'label' : 'temp', 'value' : 'ok'}]),
+                                                                                                   options = [{'label' : 'All Users', 'value' : 'All'},
+                                                                                                              {'label': 'Students', 'value': 'Students'},
+                                                                                                              {'label': 'Tutors','value': 'Tutors'}
+                                                                                                              ]),
 
                                                                                       # >
 
-                                                                                      # Role <
-                                                                                      dcc.Dropdown(searchable = False,
-                                                                                                   placeholder = 'Role',
-                                                                                                   id = 'roleDropdownId',
-                                                                                                   style = style['roleDropdownStyle'],
-                                                                                                   options = [
-
-                                                                                                       {'label' : l, 'value' : v}
-
-                                                                                                   for l, v in style['roleDropdownOptions'].items()])
+                                                                                      # # Role <
+                                                                                      # dcc.Dropdown(searchable = False,
+                                                                                      #              placeholder = 'Role',
+                                                                                      #              id = 'roleDropdownId',
+                                                                                      #              style = style['roleDropdownStyle'],
+                                                                                      #              options = [
+                                                                                      #
+                                                                                      #                  {'label' : l, 'value' : v}
+                                                                                      #
+                                                                                      #              for l, v in style['roleDropdownOptions'].items()])
 
                                                                                       # >
 
@@ -160,7 +163,7 @@ def homeLayout(username):
 
 
 @application.callback(Output('bodyDivId', 'children'),
-                      Output('roleDropdownId', 'value'),
+                      #Output('roleDropdownId', 'value'),
                       Output('eventDropdownId', 'value'),
                       Output('searchDropdownId', 'value'),
                       Output('calendarButtonId', 'n_clicks'),
@@ -172,11 +175,11 @@ def homeLayout(username):
                       Input('preferenceButtonId', 'value'),
                       Input('calendarButtonId', 'n_clicks'),
                       Input('dashboardButtonId', 'n_clicks'),
-                      Input('preferenceButtonId', 'n_clicks'),
+                      Input('preferenceButtonId', 'n_clicks'))
 
-                      State('roleDropdownId', 'value'))
+                      #State('roleDropdownId', 'value'))
 def headerCallback(eventValue, searchValue, userId, calendarClick, dashboardClick, preferenceClick,
-                   roleValue):
+                   ):
     '''  '''
 
     # if (header) <
@@ -202,15 +205,15 @@ def headerCallback(eventValue, searchValue, userId, calendarClick, dashboardClic
             'preferenceId' : preferenceLayout(userId),
             'dashboardId' : dashboardLayout(userId),
             'calendarId' : calendarLayout(userId),
-            'searchId' : searchLayout(userId, name, roleValue)
+            'searchId' : searchLayout(name)
 
         }[inputs[0]]
 
-        return (callbacks, None, None, None, 0, 0, 0)
+        return (callbacks, None, None, 0, 0, 0)
 
     # >
 
     # else (default) <
-    else: return (dashboardLayout(userId), None, None, None, 0, 0, 0)
+    else: return (dashboardLayout(userId), None, None, 0, 0, 0)
 
     # >
