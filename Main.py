@@ -7,6 +7,7 @@ from backEnd.API.Member import Member
 from backEnd.API.Location import Location
 from backEnd.API.Utility import application, parentQuery, childQuery, joinQuery
 from frontEnd.Layout.Login import loginLayout
+from frontEnd.Layout.Event import eventLayout
 # >
 
 connection_string = pyodbc.connect(
@@ -18,14 +19,9 @@ connection_string = pyodbc.connect(
 )
 cursor = connection_string.cursor()
 
-print("\n\*---------------------------------------------------------------*\ \nparent query test")
-temp = joinQuery(cursor, "Event_Info", "e", "locationId", "Location_Info", "l", "locationId", "*", ("userId", "JAD6TJ"))
-print("result = ")
-for i in temp: print(i)
+if __name__ == '__main__':
+    application.layout = eventLayout
+    application.run_server(debug = True)
 
-print("\n\*---------------------------------------------------------------*\ \nparent query test")
-temp = joinQuery(cursor, "Event_Info", "e", "locationId", "Location_Info", "l", "locationId", "*", ("userId", "JAD6TJ"), True)
-print("result = ")
-for i in temp: print(i)
 
 
