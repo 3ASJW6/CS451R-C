@@ -11,7 +11,7 @@ from backEnd.API.Event import Event
 # Main <
 if (__name__ == '__main__'):
 
-    application.layout = loginLayout() # homeLayout('JAD6TJ')
+    application.layout =  homeLayout('JAD6TJ') #loginLayout()
     application.run_server()
 
 # >

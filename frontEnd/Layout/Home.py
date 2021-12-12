@@ -107,7 +107,9 @@ def homeLayout(username):
                                                                                       dcc.Dropdown(placeholder = 'Search',
                                                                                                    id = 'searchDropdownId',
                                                                                                    style = style['searchDropdownStyle'],
-                                                                                                   options = [{'label' : 'temp', 'value' : 'ok'}]),
+                                                                                                   options = [{'label' : 'All Users', 'value' : 'All'},
+                                                                                                              {'label' : 'Students', 'value' : 'Students'},
+                                                                                                              {'label' : 'Tutors', 'value' : 'Tutors'}]),
 
                                                                                       # >
 
@@ -187,7 +189,7 @@ def headerCallback(eventValue, searchValue, calendarClick, dashboardClick, prefe
     # if (header) <
     if (eventValue or searchValue or calendarClick or dashboardClick or preferenceClick):
 
-        if (searchValue is not None): return ([searchLayout(userId, searchValue, roleValue)] + outputs)
+        if (searchValue is not None): return ([searchLayout(searchValue)] + outputs)
         if (eventValue == 'createId'): return ([eventCreateLayout(userId)] + outputs)
         if (eventValue == 'cancelId'): return ([eventCancelLayout(userId)] + outputs)
         if (eventValue == 'updateId'): return ([eventUpdateLayout(userId)] + outputs)
